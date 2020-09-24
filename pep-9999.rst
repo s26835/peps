@@ -1,1 +1,8 @@
+PEP: 9999
+Title: Aliased variables and ``alias`` keyword
+Author: Finn Mason
+Status: Draft
+Type: Standards Track
+Created: 24-Sep-2020
+Post-History:
 
