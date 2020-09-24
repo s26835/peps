@@ -6,3 +6,10 @@ Type: Standards Track
 Created: 24-Sep-2020
 Post-History:
 
+Abstract
+========
+This PEP proposes a system to create "aliases" to variables that are accessed with long variable names due to dotted-attribute notation, causing the programmer to repetitively write long phrases to access some object attributes. This is not only frustrating to the programmer, but also adds many bytes to files that could be shorter.
+
+Motivation
+==========
+Currently, to access and edit ``obj.attr.val.__name__.upper()``
