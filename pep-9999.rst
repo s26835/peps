@@ -4,7 +4,7 @@ Author: Finn Mason
 Status: Draft
 Type: Standards Track
 Created: 24-Sep-2020
-Post-History:
+Post-History: 24-Sep-2020
 
 Abstract
 ========
@@ -12,9 +12,35 @@ This PEP proposes a system to create "aliases" to variables that are accessed wi
 
 Motivation
 ==========
-Currently, to access and edit ``obj.attr.val``, for example, the programmer has to repeatedly write ``obj.attr.val`` throughout their code if it is accessed many times. Wouldn't it be nice to create an "alias" to ``obj.attr.val`` so that you didn't have to keep writing ``obj.attr.val`` (and, for someone looking through the code, not to mention this PEP, so that you didn't have to keep *reading* ``obj.attr.val``)? The solution, of course, is to write a variable that stores the value! And this works!... for mutable data types. Take the following example:
-..code-block:: Python
->>> obj.attr.val = [1, 2]
->>> alias = obj.attr.val
->>> alias
-[1, 2]
+Currently, to access and edit ``obj.attr.val``, for example, the programmer has to repeatedly write ``obj.attr.val`` throughout their code if it is accessed many times. Wouldn't it be nice to create an "alias" to ``obj.attr.val`` so that you didn't have to keep writing ``obj.attr.val`` (and, for someone looking through the code, not to mention this PEP, so that you didn't have to keep *reading* ``obj.attr.val``)? The solution, of course, is to write a variable that stores the value! And this works!... for mutable data types. Take the following example::
+
+  >>> obj.attr.val = [1, 2]
+  >>> alias = obj.attr.val
+  >>> alias
+  [1, 2]
+  >>> alias.append(3)
+  >>> alias
+  [1, 2, 3]
+  >>> obj.attr.val
+  [1, 2, 3]
+  >>> alias *= 2
+  >>> alias
+  [1, 2, 3, 1, 2, 3]
+  >>> obj.attr.val
+  [1, 2, 3, 1, 2, 3]
+  >>> #Presumably we do more things with obj.attr.val
+
+However, this changes if ``obj.attr.val`` is immutable::
+
+  >>> obj.attr.val = 4
+  >>> alias = obj.attr.val
+  >>> obj.attr.val
+  4
+  >>> alias #Works so far...
+  4
+  >>> alias += 1
+  >>> alias
+  5
+  >>> obj.attr.val #Whoops
+  4
+  >>> alias = obj.attr
