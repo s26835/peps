@@ -13,7 +13,7 @@ This PEP proposes a system to create "aliases" to variables that are accessed wi
 Motivation
 ==========
 Currently, to access and edit ``obj.attr.val``, for example, the programmer has to repeatedly write ``obj.attr.val`` throughout their code if it is accessed many times. Wouldn't it be nice to create an "alias" to ``obj.attr.val`` so that you didn't have to keep writing ``obj.attr.val`` (and, for someone looking through the code, not to mention this PEP, so that you didn't have to keep *reading* ``obj.attr.val``)? The solution, of course, is to write a variable that stores the value! And this works!... for mutable data types. Take the following example:
-::
+..code-block:: Python
 >>> obj.attr.val = [1, 2]
 >>> alias = obj.attr.val
 >>> alias
